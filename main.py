@@ -5,6 +5,8 @@ menu = '''
 1 - Ряд Маклорена e^x
 2 - Ряд Маклорена sh(x)
 3 - Ряд Маклорена (1 - x) ^ m
+4 - Ряд Маклорена sin(x)
+5 - Ряд Маклорена cos(x)
 
 0 - Завершение программы'''
 
@@ -42,13 +44,36 @@ def main():
                     try:
                         x = float(input('Введите X\n'))
                         m = float(input('Введите M\n'))
-                        if abs(x) > 100 or abs(m) > 100:
+                        if abs(x) > 1 or abs(m) > 100:
                             raise ValueError
                     except ValueError:
-                        print('Вводите числа от -100 до 100')
+                        print('Вводите числа x - от -1 до 1 и m от -100 до 100')
                         continue
                     print(f'Результат: {func10(n, x, m)}')
                     break
+            case '4':
+                while True:
+                    try:
+                        x = float(input('Введите X\n'))
+                        if abs(x) > 1000:
+                            raise ValueError
+                    except ValueError:
+                        print('Введите число от -1000 до 1000')
+                        continue
+                    print(f'Результат: {func2(n, x)}')
+                    break
+            case '5':
+                while True:
+                    try:
+                        x = float(input('Введите X\n'))
+                        if abs(x) > 1000:
+                            raise ValueError
+                    except ValueError:
+                        print('Введите число от -1000 до 1000')
+                        continue
+                    print(f'Результат: {func3(n, x)}')
+                    break
+
             case '0':
                 print('Завершение программы...')
                 break
@@ -99,5 +124,35 @@ def func10(n, x, m):
         c += 1
         sign = not sign
     return func
+
+def func2(n, x):
+    """Нахождение sin(x) по ряду Маклорена с заданной точностью n"""
+    sin = 0
+    c = 1
+    sign = False
+    while n:
+        if sign:
+            sin -= (x ** c) / factorial(c)
+        else:
+            sin += (x ** c) / factorial(c)
+        sign = not sign
+        n -= 1
+        c += 2
+    return sin
+
+def func3(n, x):
+    """Нахождение cos(x) по ряду Маклорена с заданной точностью n"""
+    cos = 1
+    c = 2
+    sign = True
+    while n:
+        if sign:
+            cos -= (x ** c) / factorial(c)
+        else:
+            cos += (x**c)/factorial(c)
+        sign = not sign
+        n -= 1
+        c += 2
+    return cos
 
 main()
