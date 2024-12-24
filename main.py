@@ -65,4 +65,29 @@ def func4(n, x):
         c += 2
     return ch
 
+def func10_sup(m, c):
+    """Вспомогательная функция для 10 ряда Маклорена
+       Возвращает m(m-1)(m-2)...(m-c)"""
+    res = 1
+    if c == 1:
+        return m
+    for i in range(c):
+        res *= (m-i)
+    return res
+
+def func10(n, x, m):
+    """Нахождение (1-x)^m по ряду Маклорена с заданной точностью n"""
+    func = 1
+    sign = True
+    c = 1
+    while n:
+        if sign:
+            func -= func10_sup(m, c)/factorial(c) * x**c
+        else:
+            func += func10_sup(m, c)/factorial(c) * x**c
+        n -= 1
+        c += 1
+        sign = not sign
+    return func
+
 main()
