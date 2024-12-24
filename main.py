@@ -38,7 +38,17 @@ def main():
                     print(f'Результат: {func4(n, x)}')
                     break
             case '3':
-                pass
+                while True:
+                    try:
+                        x = float(input('Введите X\n'))
+                        m = float(input('Введите M\n'))
+                        if abs(x) > 100 or abs(m) > 100:
+                            raise ValueError
+                    except ValueError:
+                        print('Вводите числа от -100 до 100')
+                        continue
+                    print(f'Результат: {func10(n, x, m)}')
+                    break
             case '0':
                 print('Завершение программы...')
                 break
