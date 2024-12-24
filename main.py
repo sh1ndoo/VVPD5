@@ -7,6 +7,7 @@ menu = '''
 3 - Ряд Маклорена (1 - x) ^ m
 4 - Ряд Маклорена sin(x)
 5 - Ряд Маклорена cos(x)
+6 - Ряд Маклорена ch(x)
 
 0 - Завершение программы'''
 
@@ -20,7 +21,7 @@ def main():
             case '1':
                 while True:
                     try:
-                        x = float(input('Введите X\n'))
+                        x = int(input('Введите X\n'))
                         if abs(x) > 1000:
                             raise ValueError
                     except ValueError:
@@ -31,7 +32,7 @@ def main():
             case '2':
                 while True:
                     try:
-                        x = float(input('Введите X\n'))
+                        x = int(input('Введите X\n'))
                         if abs(x) > 1000:
                             raise ValueError
                     except ValueError:
@@ -43,7 +44,7 @@ def main():
                 while True:
                     try:
                         x = float(input('Введите X\n'))
-                        m = float(input('Введите M\n'))
+                        m = int(input('Введите M\n'))
                         if abs(x) > 1 or abs(m) > 100:
                             raise ValueError
                     except ValueError:
@@ -54,7 +55,7 @@ def main():
             case '4':
                 while True:
                     try:
-                        x = float(input('Введите X\n'))
+                        x = int(input('Введите X\n'))
                         if abs(x) > 1000:
                             raise ValueError
                     except ValueError:
@@ -65,7 +66,7 @@ def main():
             case '5':
                 while True:
                     try:
-                        x = float(input('Введите X\n'))
+                        x = int(input('Введите X\n'))
                         if abs(x) > 1000:
                             raise ValueError
                     except ValueError:
@@ -73,7 +74,17 @@ def main():
                         continue
                     print(f'Результат: {func3(n, x)}')
                     break
-
+            case '6':
+                while True:
+                    try:
+                        x = int(input('Введите X\n'))
+                        if abs(x) > 1000:
+                            raise ValueError
+                    except ValueError:
+                        print('Введите число от -1000 до 1000')
+                        continue
+                    print(f'Результат: {func5(n, x)}')
+                    break
             case '0':
                 print('Завершение программы...')
                 break
@@ -92,13 +103,13 @@ def func1(n, x):
 
 def func4(n, x):
     """Нахождение sh(x) по ряду Маклорена с заданной точностью n"""
-    ch = 0
+    sh = 0
     c = 1
     while n:
-        ch += (x**c)/(factorial(c))
+        sh += (x**c)/(factorial(c))
         n -= 1
         c += 2
-    return ch
+    return sh
 
 def func10_sup(m, c):
     """Вспомогательная функция для 10 ряда Маклорена
@@ -154,5 +165,15 @@ def func3(n, x):
         n -= 1
         c += 2
     return cos
+
+def func5(n, x):
+    """Нахождение ch(x) по ряду Маклорена с заданной точностью n"""
+    ch = 1
+    c = 2
+    while n:
+        ch += (x**c)/factorial(c)
+        n -= 1
+        c += 2
+    return ch
 
 main()
